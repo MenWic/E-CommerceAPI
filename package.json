@@ -1,0 +1,23 @@
+{
+  "name": "e-commerce-back",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000E\u0000-\u0000C\u0000o\u0000m\u0000m\u0000e\u0000r\u0000c\u0000e\u0000-\u0000A\u0000P\u0000I\u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MenWic/E-Commerce-Back.git"
+  },
+  "author": "menwic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MenWic/E-Commerce-Back/issues"
+  },
+  "homepage": "https://github.com/MenWic/E-Commerce-Back#readme",
+  "dependencies": {
+    "nodemon": "^3.1.0",
+    "xpress": "^2.4.6"
+  }
+}
