@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/MenWic/E-Commerce-Back#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "mysql2": "^3.9.2",
     "nodemon": "^3.1.0",
+    "sequelize": "^6.37.1",
     "xpress": "^2.4.6"
   }
 }
