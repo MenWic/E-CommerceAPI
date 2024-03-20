@@ -20,7 +20,7 @@ const login = async (req, res) => {
 
         // Verificar si el usuario existe y si la contraseña es correcta
         if (usuarioEncontrado && bcrypt.compareSync(password, usuarioEncontrado.password)) {
-            res.json({ email });
+            res.json({ usuarioEncontrado:usuarioEncontrado });
         } else {
             res.send(null);
         }

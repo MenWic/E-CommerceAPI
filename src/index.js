@@ -34,7 +34,7 @@ async function start() {
     try {
         await sequelize.authenticate();
         console.log('CONEXION ESTABLECIDA CON LA DB');
-        await sequelize.sync({ alter: true, force: true }); // Esto sincronizará los modelos con la base de datos
+        await sequelize.sync({ alter: true, force: false }); // Esto sincronizará los modelos con la base de datos
         app.listen(3000, () => {
             console.log('SERVER ESCUCHANDO EN PORT 3000');
         });
