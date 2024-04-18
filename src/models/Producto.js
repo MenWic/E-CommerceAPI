@@ -1,30 +1,39 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../sequelize');
-const Producto = require('./Producto');
 
-const Usuario = sequelize.define('Usuario', {
+const Producto = sequelize.define('Producto', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    username: {
+
+    /* imagen: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+        allowNull: false,
+        unique: true //probar
+    }, */
+    titulo: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
-    rol: {
+    descripcion: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    email: {
+    precio: {
+        type: DataTypes.DOUBLE,
+        allowNull: false,
+    },
+    estado: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
     },
-    password: {
+    categoria: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
     aprobado: {
         type: DataTypes.BOOLEAN,
@@ -32,15 +41,4 @@ const Usuario = sequelize.define('Usuario', {
     }
 });
 
-//Relacion: 1 Usuario tiene * Productos
-Usuario.hasMany(Producto, {
-    foreignKey: {
-        allowNull: false,
-        onUpdate: 'CACADE',
-        onDelete: 'CASCADE'
-    },
-    hooks: true
-});
-Producto.belongsTo(Usuario);
-
-module.exports = Usuario;
+module.exports = Producto;

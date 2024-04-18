@@ -1,4 +1,5 @@
 const Usuario = require('../models/Usuario'); // Importar el modelo Usuario definido en Sequelize
+const Producto = require('../models/Producto');
 const bcrypt = require('bcrypt');
 
 // Función para Loggear
@@ -44,7 +45,7 @@ const usuariosAprobados = async (req, res) => {
     }
 }
 
-// Cambia el estado aprobado de un usuario
+// Elimna a un usuario del sistema
 const eliminarUsuario = async (req, res) => {
     const id = req.body.id;
     
@@ -64,20 +65,6 @@ const eliminarUsuario = async (req, res) => {
     
         console.error('Error al aprobar usuario: ', error);
         res.json({ error: 'Error interno del servidor' });
-    }
-}
-
-// Devuelve un arreglo de objetos/usuarios que no han sido aprobados aun
-const usuariosDesaprobados = async (req, res) => {
-    try {
-        // 1) Buscar usuario cuyo campo aporbado sea falso 
-        const usuariosDesaprobados = await Usuario.findAll({ where: { aprobado:false } });
-
-        // 2) Asignamos el/los usuario(s) obtenidos a la const
-            res.json({ usuariosDesaprobados:usuariosDesaprobados });
-    } catch (error) {
-        console.error([error]);
-        res.json([]);
     }
 }
 
@@ -106,6 +93,43 @@ const aprobarUsuario = async (req, res) => {
         res.json({ error: 'Error interno del servidor' });
     }
 }
+
+// Devuelve un arreglo de objetos/usuarios que no han sido aprobados aun
+const usuariosDesaprobados = async (req, res) => {
+    try {
+        // 1) Buscar usuario cuyo campo aporbado sea falso 
+        const usuariosDesaprobados = await Usuario.findAll({ where: { aprobado:false } });
+
+        // 2) Asignamos el/los usuario(s) obtenidos a la const
+            res.json({ usuariosDesaprobados:usuariosDesaprobados });
+    } catch (error) {
+        console.error([error]);
+        res.json([]);
+    }
+}
+
+// Función para obtener los productos de un usuario por su ID
+const productosPorUsuario = async (req, res) => {
+    const usuarioId = req.body.id; // Obtener el ID del usuario de los parámetros de la solicitud
+    //Era params
+    try {
+        // Buscar todos los productos asociados al usuario por su ID
+        const productos = await Producto.findAll({ where: { UsuarioId: usuarioId } });
+
+        // Verificar si se encontraron productos
+        if (productos.length > 0) {
+            res.json({ productos: productos });
+        } else {
+            console.log('El usuario no tiene productos asociados.');
+            res.json({ mensaje: 'El usuario no tiene productos asociados.' });
+        }
+    } catch (error) {
+        console.error(error);
+        console.log('Error interno del servidor');
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+}
+
 
 // Función para registrar un nuevo Usuario
 const crearUsuario = async (req, res) => {
@@ -159,32 +183,6 @@ const editarUsuario = async (req, res) => {
     }
 }
 
-/**
- * Busca al usuario por su email
- */
-/* const buscarUsuarioPorNombre = async (req, res) => {
-    const { nombre_usuario } = req.query;
-
-    try {
-        // Buscar al usuario por su email
-        const usuarioEncontrado = await Usuario.findOne({ where: { email: nombre_usuario } });
-
-        if (usuarioEncontrado) {
-            res.json(usuarioEncontrado);
-        } else {
-            res.json({});
-        }
-    } catch (error) {
-        console.error(error);
-        res.json({});
-    }
-} */
-
-// Verificar que los campos no estén vacíos al editar un usuario
-function verificarUsuario(email, password) {
-    return email && password;
-}
-
 module.exports = {
     login,
     usuariosAprobados,
@@ -193,8 +191,7 @@ module.exports = {
     aprobarUsuario,
     crearUsuario,
 
-    editarUsuario
-    //verificarUsuario,
+    editarUsuario,
+    productosPorUsuario,
     //buscarUsuarioPorNombre
-    
 }

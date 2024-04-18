@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const sequelize = require('./sequelize');
 
 const usuarioRoutes = require('./routes/Usuario.routes');
+const productoRoutes = require('./routes/Producto.routes');
+
 /*const articuloRuta = require('./rutas/ProductoRuta');
 const monedaRuta = require('./rutas/MonedaRuta');
 const retiroRuta = require('./rutas/RetiroRuta'); */
@@ -46,7 +48,8 @@ async function start() {
 start(); // Llamamos la función
 
 app.use('/usuario', usuarioRoutes); // Las rutas para los usuarios serán leídas desde localhost/usuario/
-/* app.use('/producto', articuloRuta);
+app.use('/producto', productoRoutes);
+/*
 app.use('/compra', compraRuta);
 app.use('/tags', tagRuta);
 app.use('/moneda', monedaRuta);
