@@ -114,7 +114,10 @@ const productosPorUsuario = async (req, res) => {
     //Era params
     try {
         // Buscar todos los productos asociados al usuario por su ID
-        const productos = await Producto.findAll({ where: { UsuarioId: usuarioId } });
+        const productos = await Producto.findAll({   where: { 
+            UsuarioId: usuarioId,
+            vendido: false
+          }  });
 
         // Verificar si se encontraron productos
         if (productos.length > 0) {
@@ -185,13 +188,15 @@ const editarUsuario = async (req, res) => {
 
 module.exports = {
     login,
-    usuariosAprobados,
-    eliminarUsuario,
-    usuariosDesaprobados,
-    aprobarUsuario,
+
     crearUsuario,
+    aprobarUsuario,
+    eliminarUsuario,
+    usuariosAprobados,
+    usuariosDesaprobados,
+
+    productosPorUsuario,
 
     editarUsuario,
-    productosPorUsuario,
     //buscarUsuarioPorNombre
 }

@@ -36,7 +36,7 @@ const Usuario = sequelize.define('Usuario', {
 Usuario.hasMany(Producto, {
     foreignKey: {
         allowNull: false,
-        onUpdate: 'CACADE',
+        onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
     },
     hooks: true

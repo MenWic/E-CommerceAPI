@@ -27,18 +27,27 @@ const Producto = sequelize.define('Producto', {
         type: DataTypes.DOUBLE,
         allowNull: false,
     },
-    estado: {
+    estado: { /* Determinar estado de Producto o Servicio */
         type: DataTypes.STRING,
         allowNull: false,
     },
-    categoria: {
+    categoria: { /* Tag para clasificacion */
         type: DataTypes.STRING,
         allowNull: false,
     },
     aprobado: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.BOOLEAN, //String = Desaprobado (Solicitud), Aprobado (Producto en Venta), Vendido (Producto Vendido)
         allowNull: false
-    }
+    },
+    vendido: {
+        type: DataTypes.BOOLEAN, //String = Desaprobado (Solicitud), Aprobado (Producto en Venta), Vendido (Producto Vendido)
+        allowNull: false
+    },
+
+   /*  disponible: {
+        type: DataTypes.STRING, //String = Desaprobado (Solicitud), Aprobado (Producto en Venta), Vendido (Producto Vendido)
+        allowNull: false
+    } */
 });
 
 module.exports = Producto;
