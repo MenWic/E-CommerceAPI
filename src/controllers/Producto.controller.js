@@ -161,6 +161,7 @@ module.exports = {
     aprobarProducto,
     eliminarProducto,
     productosDesaprobados,
+    comprarProducto,
 
     productosExceptoDeUsuario,
 
